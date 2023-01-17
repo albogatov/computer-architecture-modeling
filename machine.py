@@ -5,12 +5,6 @@ import sys
 from isa import read_code
 from mc import MC, default_mc_memory
 
-logger = logging.getLogger('spam_application')
-logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler('spam.log')
-fh.setLevel(logging.DEBUG)
-logger.addHandler(fh)
-
 
 class CommandMemory:
     """Command memory"""
@@ -136,7 +130,7 @@ class DataPath:
             symbol = self.data_memory.input_buffer.pop(0)
             symbol_code = ord(symbol)
             assert 0 <= symbol_code <= 127, \
-                "input character is out of bound: {}".format(symbol_code)
+                "input character is out of bound"
             self.acc = symbol
 
     def ip_latch(self):
@@ -192,6 +186,18 @@ class DataPath:
         self.n = 1 if (res > 0) else 0
 
 
+def load_module(code, mem):
+    sz = len(code)
+    assert sz <= mem.size - 2, "Not enough memory"
+    program_entry = -1
+    for i in range(len(code)):
+        if program_entry == -1:
+            if isinstance(code[i], dict):
+                program_entry = i
+        mem.mem[i] = code[i]
+    return program_entry
+
+
 class ControlUnit:
     """Control unit"""
 
@@ -202,21 +208,10 @@ class ControlUnit:
         self.data_path = data_path
         self.mc_memory = mc_memory
         self.mc_pointer = 0
-        self.program_entry = self.load_module(code, self.data_path.code_memory)
-        self.data_entry = self.load_module(data, self.data_path.data_memory)
+        self.program_entry = load_module(code, self.data_path.code_memory)
+        self.data_entry = load_module(data, self.data_path.data_memory)
         self.data_path.ip = self.program_entry
         self._tick = 0
-
-    def load_module(self, code, mem):
-        sz = len(code)
-        assert sz <= mem.size - 2, "Not enough memory"
-        program_entry = -1
-        for i in range(len(code)):
-            if program_entry == -1:
-                if isinstance(code[i], dict):
-                    program_entry = i
-            mem.mem[i] = code[i]
-        return program_entry
 
     def inc_mc_pointer(self):
         self.mc_pointer += 1
@@ -362,4 +357,9 @@ def main(args):
 
 
 if __name__ == '__main__':
+    logger = logging.getLogger('spam_application')
+    logger.setLevel(logging.DEBUG)
+    fh = logging.FileHandler('spam.log')
+    fh.setLevel(logging.DEBUG)
+    logger.addHandler(fh)
     main(sys.argv[1:])
