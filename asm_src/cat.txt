@@ -1,5 +1,5 @@
 .data:
-zero NUM 0
+zero NUMERIC 0
 .text:
 loop:
 in

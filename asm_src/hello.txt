@@ -1,5 +1,5 @@
 .data:
-hw string "Hello, world!"
+hw STRING "Hello, world!"
 addr num 0
 ch char 0
 .text:

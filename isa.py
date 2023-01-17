@@ -3,7 +3,7 @@ from enum import Enum
 import json
 
 
-class AsmOpcode(Enum):
+class AsmCmd(Enum):
     """ASM opcodes"""
     CMP = "CMP"
     JE = "JE"
@@ -37,18 +37,18 @@ class Opcode(Enum):
 
 
 opcode_args = {
-    AsmOpcode.CMP.name: 1,
-    AsmOpcode.JE.name: 1,
-    AsmOpcode.LD.name: 1,
-    AsmOpcode.WR.name: 1,
-    AsmOpcode.INC.name: 0,
-    AsmOpcode.JMP.name: 1,
-    AsmOpcode.ADD.name: 1,
-    AsmOpcode.HLT.name: 0,
-    AsmOpcode.IN.name: 0,
-    AsmOpcode.OUT.name: 0,
-    AsmOpcode.SH.name: 0,
-    AsmOpcode.JG.name: 1
+    AsmCmd.CMP.name: 1,
+    AsmCmd.JE.name: 1,
+    AsmCmd.LD.name: 1,
+    AsmCmd.WR.name: 1,
+    AsmCmd.INC.name: 0,
+    AsmCmd.JMP.name: 1,
+    AsmCmd.ADD.name: 1,
+    AsmCmd.HLT.name: 0,
+    AsmCmd.IN.name: 0,
+    AsmCmd.OUT.name: 0,
+    AsmCmd.SH.name: 0,
+    AsmCmd.JG.name: 1
 }
 
 

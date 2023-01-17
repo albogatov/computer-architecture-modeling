@@ -1,10 +1,10 @@
 .data:
-max NUM 4000000
-b NUM 1
-c NUM 2
-d NUM 0
-sum NUM 0
-zero NUM 0
+max NUMERIC 4000000
+b NUMERIC 1
+c NUMERIC 2
+d NUMERIC 0
+sum NUMERIC 0
+zero NUMERIC 0
 .text:
 loop:
 ld [c]

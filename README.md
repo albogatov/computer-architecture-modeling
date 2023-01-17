@@ -6,6 +6,44 @@
 
 ## Язык программирования
 
+```
+<program> ::= <section_list> <EOF>
+<section_list> ::= <section> <section_list> | <section>
+<section> ::= "." <identifier> <EOL> <line_list>
+<line_list> ::= <line> <line_list> | <line>
+<line> ::= <line_instruction> <EOL> | <EOL>
+<line_instruction> ::= <label_decl> | <instruction> | <variable_declaration>
+<variable_declaration> ::= <identifier> <type> <letter_or_number_list>
+<label_decl> ::= <label> ":"
+<label> ::= <identifier>
+<identifier> ::= <letter> | <letter> <letter_or_number_list>
+
+<instruction> ::= <no_arg_instr> | <one_arg_instr>
+<no_arg_instr> ::= <no_arg_op>
+<one_arg_instr> ::= <one_arg_op> <operand>
+<operand> ::= <relative_operand> | <abs_operand>
+<abs_operand> ::= <label> | <immediate>
+<relative_operand> ::= "[" <label> "]"
+<immediate> ::= <int_lit> | <char_lit>
+
+<int_lit> ::= <number_list> | "-" <number_list>
+<number_list> ::= <number> <number_list> | <number>
+<char_lit> ::= "'" <letter> "'" | "'" <number> "'"
+
+<letter_or_number_list> ::= <letter_or_number> | <letter_or_number> <letter_or_number_list>
+<letter_or_number> ::= <letter> | <number>
+
+<letter> ::= [a-z] | [A-Z]
+<number> ::= [0-9]
+
+<EOF> ::= "1A"
+<EOL> ::= "\n"
+
+<type> ::= "STRING" | "NUMERIC" | "CHAR"
+<no_arg_op> ::= "inc" | "sh" | "in" | "out" | "hlt"
+<one_arg_op> ::= "add" | "ld" | "cmp" | "je" | "jg" | "jmp" | "wr"
+```
+
 - В коде asm могут присутствовать 2 секции: .data и .text.
 
 Вне секций объявление данных или код запрещен.
@@ -27,7 +65,7 @@ ld [ac]
 - Машинное слово - 32 бита.
 - Используется гарвардская архитектура - команды и данные лежат в разных блоках памяти.
 
-### Система команд
+### Работа с командами
 
 Регистры:
 - acc - аккумулятор
@@ -74,18 +112,18 @@ ld [ac]
 
 - Цикл выборки и исполнения инструкций будет продолжаться до тех пор, пока не произойдет ошибка или пока не будет вызвана команда HLT.
 
-| Микрокоманды                                                    | Комментарий |
-|:----------------------------------------------------------------|:------------------|
-| ALU_RIGHT_MUX_ZERO/ALU_RIGHT_MUX_MEM                            | Сигнал к мультиплексору правого входа АЛУ |
-| ALU_LEFT_MUX_ZERO/ALU_LEFT_MUX_ACC                              | Сигнал к мультиплексору левого входа АЛУ | 
-| ALU_SUB/ALU_ADD/ALU_INC/ALU_SH                                  | Сигнал выбора операции АЛУ | 
-| ACC_MUX_ALU/ACC_MUX_MEM/ACC_MUX_INPUT                           | Сигнал к мультиплексору АСС |
-| ACC_WRITE                                           | Сигнал записи АСС в память | 
-| IP_MUX_INC/IP_MUX_INSTR_ADDR_PART                               | Сигнал к мультиплексору IP | 
-| ADDR_MUX_INSTR_ADDR_PART/ADDR_MUX_ACC                           | Сигнал к мультиплексору ADDR | 
-| ACC_LATCH/IP_LATCH/ADDR_LATCH                                   | Сигнал фиксации значений в регистрах | 
-| Z_SET_GOTO/GOTO/CMP_INSTR_NOT_EQ_GOTO/CMP_INSTR_ARG_NOT_EQ_GOTO | Команды перехода в памяти микрокоманд |
-| STOP/DECODING_ERR                                               | Команды останова и ошибки декодирования инструкций |
+| Микрокоманды                                                               | Комментарий |
+|:---------------------------------------------------------------------------|:------------------|
+| ALU_RIGHT_MUX_ZERO/ALU_RIGHT_MUX_MEM                                       | Сигнал к мультиплексору правого входа АЛУ |
+| ALU_LEFT_MUX_ZERO/ALU_LEFT_MUX_ACC                                         | Сигнал к мультиплексору левого входа АЛУ | 
+| ALU_SUB/ALU_ADD/ALU_INC/ALU_SH                                             | Сигнал выбора операции АЛУ | 
+| ACC_MUX_ALU/ACC_MUX_MEM/ACC_MUX_INPUT                                      | Сигнал к мультиплексору АСС |
+| ACC_WRITE                                                                  | Сигнал записи АСС в память | 
+| IP_MUX_INC/IP_MUX_INSTR_ADDR_PART                                          | Сигнал к мультиплексору IP | 
+| ADDR_MUX_INSTR_ADDR_PART/ADDR_MUX_ACC                                      | Сигнал к мультиплексору ADDR | 
+| ACC_LATCH/IP_LATCH/ADDR_LATCH                                              | Сигнал фиксации значений в регистрах | 
+| N_SET_GOTO/Z_SET_GOTO/GOTO/CMP_INSTR_NOT_EQ_GOTO/CMP_INSTR_ARG_NOT_EQ_GOTO | Команды перехода в памяти микрокоманд |
+| STOP/DECODING_ERR                                                          | Команды останова и ошибки декодирования инструкций |
 
 ## Транслятор
 

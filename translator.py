@@ -1,7 +1,7 @@
 """Translator"""
 import logging
 import sys
-from isa import AsmOpcode, opcode_args, write_code
+from isa import AsmCmd, opcode_args, write_code
 
 
 class IllegalSyntaxException(Exception):
@@ -70,7 +70,7 @@ def translate(text):
                         final_code.append(data[i])
                     final_code.append("\0")
                     line_number += len(data) + 1
-                elif data_type.upper() == "NUM":
+                elif data_type.upper() == "NUMERIC":
                     final_code.append(int(data))
                     line_number += 1
                 elif data_type.upper() == "CHAR":
@@ -86,7 +86,7 @@ def translate(text):
             elif data_flag == 0:
 
                 found = -1
-                opcodes = list(AsmOpcode)
+                opcodes = list(AsmCmd)
                 for o in opcodes:
 
                     command_name = o.value
