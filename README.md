@@ -100,8 +100,6 @@ ld [ac]
 
 ## Модель процессора
 
-### Схема
-
 [Схема](https://gitlab.se.ifmo.ru/albogatov/csa-lab-3/-/blob/master/CSA3.png)
 
 Особенности работы модели:
