@@ -1,0 +1,32 @@
+.data:
+max NUM 4000000
+b NUM 1
+c NUM 2
+d NUM 0
+sum NUM 0
+zero NUM 0
+.text:
+loop:
+ld [c]
+cmp max
+jg print_result
+ld [sum]
+add c
+wr sum
+cmp max
+jg print_result
+ld [c]
+sh
+add b
+wr d
+ld [d]
+add c
+add b
+wr c
+ld [zero]
+add d
+wr b
+jmp loop
+print_result:
+out
+hlt

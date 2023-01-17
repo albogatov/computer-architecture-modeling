@@ -1,0 +1,138 @@
+[
+    4000000,
+    1,
+    2,
+    0,
+    0,
+    0,
+    {
+        "opcode": "LD_REL",
+        "args": [
+            2
+        ]
+    },
+    {
+        "opcode": "CMP",
+        "args": [
+            0
+        ]
+    },
+    {
+        "opcode": "JG",
+        "args": [
+            20
+        ]
+    },
+    {
+        "opcode": "LD_REL",
+        "args": [
+            4
+        ]
+    },
+    {
+        "opcode": "ADD",
+        "args": [
+            2
+        ]
+    },
+    {
+        "opcode": "WR",
+        "args": [
+            4
+        ]
+    },
+    {
+        "opcode": "CMP",
+        "args": [
+            0
+        ]
+    },
+    {
+        "opcode": "JG",
+        "args": [
+            20
+        ]
+    },
+    {
+        "opcode": "LD_REL",
+        "args": [
+            2
+        ]
+    },
+    {
+        "opcode": "SH",
+        "args": [
+            0
+        ]
+    },
+    {
+        "opcode": "ADD",
+        "args": [
+            1
+        ]
+    },
+    {
+        "opcode": "WR",
+        "args": [
+            3
+        ]
+    },
+    {
+        "opcode": "LD_REL",
+        "args": [
+            3
+        ]
+    },
+    {
+        "opcode": "ADD",
+        "args": [
+            2
+        ]
+    },
+    {
+        "opcode": "ADD",
+        "args": [
+            1
+        ]
+    },
+    {
+        "opcode": "WR",
+        "args": [
+            2
+        ]
+    },
+    {
+        "opcode": "LD_REL",
+        "args": [
+            5
+        ]
+    },
+    {
+        "opcode": "ADD",
+        "args": [
+            3
+        ]
+    },
+    {
+        "opcode": "WR",
+        "args": [
+            1
+        ]
+    },
+    {
+        "opcode": "JMP",
+        "args": [
+            0
+        ]
+    },
+    {
+        "opcode": "OUT",
+        "args": [
+            -1
+        ]
+    },
+    {
+        "opcode": "HLT",
+        "args": []
+    }
+]

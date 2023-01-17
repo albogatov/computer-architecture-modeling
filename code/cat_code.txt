@@ -1,0 +1,37 @@
+[
+    0,
+    {
+        "opcode": "IN",
+        "args": [
+            -1
+        ]
+    },
+    {
+        "opcode": "CMP",
+        "args": [
+            0
+        ]
+    },
+    {
+        "opcode": "JE",
+        "args": [
+            5
+        ]
+    },
+    {
+        "opcode": "OUT",
+        "args": [
+            -1
+        ]
+    },
+    {
+        "opcode": "JMP",
+        "args": [
+            0
+        ]
+    },
+    {
+        "opcode": "HLT",
+        "args": []
+    }
+]
