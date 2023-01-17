@@ -315,15 +315,15 @@ def simulation(code, data, input_tokens, data_memory_size, limit):
             assert limit > instr_counter, "too long execution, increase limit!"
             control_unit.decode_and_execute_instruction()
             instr_counter += 1
-            logger.debug('%s', control_unit)
+            logging.debug('%s', control_unit)
 
     except EOFError:
-        logger.debug('%s', control_unit)
-        logger.info('Input buffer is empty!')
+        logging.debug('%s', control_unit)
+        logging.info('Input buffer is empty!')
     except StopIteration:
         instr_counter += 1
-        logger.debug('%s', control_unit)
-        logger.debug('Iteration stopped by HLT')
+        logging.debug('%s', control_unit)
+        logging.debug('Iteration stopped by HLT')
     data_memory.output_buffer = [str(i) for i in data_memory.output_buffer]
     return ''.join(data_memory.output_buffer), instr_counter, control_unit.current_tick()
 
@@ -357,9 +357,5 @@ def main(args):
 
 
 if __name__ == '__main__':
-    logger = logging.getLogger('spam_application')
-    logger.setLevel(logging.DEBUG)
-    fh = logging.FileHandler('spam.log')
-    fh.setLevel(logging.DEBUG)
-    logger.addHandler(fh)
+    logging.getLogger().setLevel(logging.DEBUG)
     main(sys.argv[1:])
