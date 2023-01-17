@@ -207,8 +207,7 @@ class ControlUnit:
         self.data_path.ip = self.program_entry
         self._tick = 0
 
-    @staticmethod
-    def load_module(code, mem):
+    def load_module(self, code, mem):
         sz = len(code)
         assert sz <= mem.size - 2, "Not enough memory"
         program_entry = -1
