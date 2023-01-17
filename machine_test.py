@@ -20,11 +20,11 @@ class MachineTest(unittest.TestCase):
         output = machine.main(["code/prob2_code.txt", "io/prob2_input.txt"])
         b = 1
         c = 2
-        sum = 0
+        sum_fibonacci = 0
         while c < 4000000:
-            sum += c
+            sum_fibonacci += c
             d = b + (c << 0x01)
             c = d + b + c
             b = d
-        sample_output = str(sum)
+        sample_output = str(sum_fibonacci)
         self.assertEqual(output, sample_output)

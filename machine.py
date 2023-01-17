@@ -11,8 +11,10 @@ fh = logging.FileHandler('spam.log')
 fh.setLevel(logging.DEBUG)
 logger.addHandler(fh)
 
+
 class CommandMemory:
     """Command memory"""
+
     def __init__(self, sz):
         assert sz > 0, "Memory size should be non-zero"
         self.mem = [0 for _ in range(sz)]
@@ -25,8 +27,10 @@ class CommandMemory:
         assert 0 <= addr < self.size, "Invalid address"
         return self.mem[addr]
 
+
 class DataMemory:
     """Data memory"""
+
     def __init__(self, sz, input_buffer):
         assert sz > 0, "Memory size should be non-zero"
         self.mem = [0 for _ in range(sz)]
@@ -75,6 +79,7 @@ alu_right_mux_sigs = {
 
 class DataPath:
     """Data path"""
+
     def __init__(self, code_memory, data_memory):
         self.allowed_max = 2 ** 31 - 1
         self.allowed_min = -2 ** 31
@@ -189,6 +194,7 @@ class DataPath:
 
 class ControlUnit:
     """Control unit"""
+
     def __init__(self, mc_memory, data_path, code, data):
         assert len(code) < data_path.code_memory.available_memory_end_excluded, \
             "Prog & data is too big"
@@ -201,8 +207,8 @@ class ControlUnit:
         self.data_path.ip = self.program_entry
         self._tick = 0
 
-
-    def load_module(self, code, mem):
+    @staticmethod
+    def load_module(code, mem):
         sz = len(code)
         assert sz <= mem.size - 2, "Not enough memory"
         program_entry = -1
@@ -357,5 +363,4 @@ def main(args):
 
 
 if __name__ == '__main__':
-
     main(sys.argv[1:])
